@@ -85,10 +85,12 @@ const BuildStats: React.FC<BuildStatsProps> = ({
   }) => {
     const { themeColorShade, secondaryBgColor } = useMyTheme();
     const { colorMode } = useColorMode();
+    const element2 = document.getElementById('statsBlock');
+    const boundaryElement = element2 ? element2 : 'clippingParents';
 
     return (
       <>
-        <Flex justifyContent="space-between">
+        <Flex justifyContent="space-between" className="statsBlock" id="statsBlock">
           <Flex fontWeight="bold" mr="1em" mb="0.5em" alignItems="center">
             <Box minW="30px">
               <AbilityIcon ability={ability} size="TINY" loading="eager" />
@@ -103,7 +105,18 @@ const BuildStats: React.FC<BuildStatsProps> = ({
             />
             {title}
             {info && (
-              <Popover trigger="hover" placement="top-start">
+              <Popover trigger="hover" placement="top-start" modifiers={[{
+                name: 'preventOverflow',
+                options: {
+                padding: 20,
+                boundary: boundaryElement,
+              },
+              },{
+                name: 'flip',
+                options: {
+                  fallbackPlacements: ['top', 'left'],
+                },
+              },]}>
                 <PopoverTrigger>
                   <Box>
                     <Box
