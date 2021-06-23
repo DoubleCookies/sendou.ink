@@ -24,7 +24,7 @@ import { abilities, isMainAbility } from "utils/lists/abilities";
 import { components } from "react-select";
 import ModeImage from "components/common/ModeImage";
 import MySelect from "components/common/MySelect";
-import defaultStyles from "utils/selectStyles";
+import useSelectStyles from "hooks/useSelectStyles";
 
 interface Props {
   filters: UseBuildsByWeaponState["filters"];
@@ -112,14 +112,9 @@ const BuildFilters: React.FC<Props> = ({ filters, dispatch }) => {
     modeOptions[0]
   );
 
-  const {
-    borderColor,
-    themeColorOpaque,
-    textColor,
-    gray
-  } = useMyTheme();
+  const { borderColor, themeColorOpaque, textColor, gray } = useMyTheme();
 
-  const selectDefaultStyles = defaultStyles();
+  const selectDefaultStyles = useSelectStyles();
   const selectStyles = {
     ...selectDefaultStyles,
     singleValue: (base: any) => ({
@@ -127,14 +122,14 @@ const BuildFilters: React.FC<Props> = ({ filters, dispatch }) => {
       padding: 0,
       borderRadius: 5,
       color: textColor,
-      fontSize: '0.875rem',
+      fontSize: "0.875rem",
       display: "flex",
     }),
-    option: (styles: any, {isFocused}: any) => {
+    option: (styles: any, { isFocused }: any) => {
       return {
         ...styles,
         backgroundColor: isFocused ? themeColorOpaque : undefined,
-        fontSize: '0.875rem',
+        fontSize: "0.875rem",
         color: textColor,
       };
     },
@@ -147,7 +142,7 @@ const BuildFilters: React.FC<Props> = ({ filters, dispatch }) => {
     }),
     dropdownIndicator: (base: any) => ({
       ...base,
-      padding: 4
+      padding: 4,
     }),
   };
 

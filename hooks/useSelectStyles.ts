@@ -1,13 +1,8 @@
-import { useMyTheme } from "../hooks/common";
+import { useMyTheme } from "./common";
 
-
-const defaultStyles = () => {
-  const {
-    borderColor,
-    themeColorHex,
-    themeColorOpaque,
-    textColor,
-  } = useMyTheme();
+const useSelectStyles = () => {
+  const { borderColor, themeColorHex, themeColorOpaque, textColor } =
+    useMyTheme();
 
   return {
     singleValue: (base: any) => ({
@@ -26,14 +21,14 @@ const defaultStyles = () => {
       background: themeColorHex,
       color: "black",
     }),
-    option: (styles: any, {isFocused}: any) => {
+    option: (styles: any, { isFocused }: any) => {
       return {
         ...styles,
         backgroundColor: isFocused ? themeColorOpaque : undefined,
         color: textColor,
       };
     },
-    menu: (styles: any) => ({...styles, zIndex: 999}),
+    menu: (styles: any) => ({ ...styles, zIndex: 999 }),
     control: (base: any) => ({
       ...base,
       borderColor,
@@ -43,4 +38,4 @@ const defaultStyles = () => {
   };
 };
 
-export default defaultStyles;
+export default useSelectStyles;
